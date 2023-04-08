@@ -57,11 +57,18 @@ function mergeTwoSortedArrays(arr1, arr2) {
 }
 
 function mergeSort(arr) {
-  const arrays = [];
+  if (arr.length <= 1) return arr;
+  const centerIndex = Math.floor(arr.length / 2);
+  const left = mergeSort(arr.slice(0, centerIndex));
+  const right = mergeSort(arr.slice(centerIndex));
+  return mergeTwoSortedArrays(left, right);
 }
-console.log(mergeTwoSortedArrays([1, 2, 3], [4, 5, 6, 8, 22]));
+/* console.log(mergeTwoSortedArrays([1, 2, 3], [4, 5, 6, 8, 22]));
 console.log(mergeTwoSortedArrays([2, 4, 10, 55, 60], [1, 5, 22]));
 console.log(mergeTwoSortedArrays([1, 35, 50], [5, 33, 55]));
 console.log(mergeTwoSortedArrays([1, 3, 4, 6, 10, 11], [5]));
 console.log(mergeTwoSortedArrays([5], [1]));
 console.log(mergeTwoSortedArrays([], [1]));
+ */
+
+console.log(mergeSort([10, 50, 1, 150]));
