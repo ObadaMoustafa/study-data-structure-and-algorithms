@@ -23,6 +23,12 @@ class singlyLinkedList {
     this.push(7);
   }
 
+  reset() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+
   push(val) {
     const newNode = new Node(val);
     const firstValue = this.length === 0;
@@ -80,7 +86,6 @@ class singlyLinkedList {
   }
 
   unshift(val) {
-    if (!val) return;
     const newNode = new Node(val);
     const firstValue = !this.head;
     if (firstValue) {
@@ -140,6 +145,26 @@ class singlyLinkedList {
     prev.next = elementToBeRemoved.next;
     this.length--;
     return elementToBeRemoved;
+  }
+
+  reverse() {
+    // save head and original length
+    let current = this.head;
+    const length = this.length;
+
+    // this function sets the head and tail to null and length to zero
+    this.reset();
+    let i = 0;
+    while (i < length) {
+      const currentVal = current.val;
+      this.unshift(currentVal);
+      console.log("current val", currentVal);
+      console.log("list", this);
+      current = current.next;
+      i++;
+    }
+
+    return this;
   }
 }
 
