@@ -153,7 +153,24 @@ class SingleLinkedList {
 
     return true;
   }
+
+  reverse() {
+    let current = this.head,
+      counter = 0;
+    const originalLength = this.length;
+    this.resetList();
+    while (counter < originalLength) {
+      this.unshift(current.val);
+      current = current.next;
+      counter++;
+    }
+
+    return this;
+  }
 }
 
 const list = new SingleLinkedList();
-list.seedData();
+list.push("How");
+list.push("are");
+list.push("you");
+list.push("?");
