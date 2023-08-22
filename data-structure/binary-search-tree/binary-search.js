@@ -54,13 +54,35 @@ class BinaryTree {
       }
     }
   }
+
+  BFS() {
+    let current = this.root;
+    const queue = [current],
+      visited = [];
+    while (queue.length) {
+      // delete the first element from the queue
+      current = queue.shift();
+      // push the node to visited var and put it's right and left in the queue
+      visited.push(current.value);
+      const right = current.right;
+      const left = current.left;
+      if (left) queue.push(left);
+      if (right) queue.push(right);
+    }
+
+    return visited;
+  }
 }
 
 const tree = new BinaryTree();
-tree.insert(50);
+/*
+          10
+      6       15
+    3   8        20
+*/
 tree.insert(10);
+tree.insert(6);
 tree.insert(15);
+tree.insert(3);
 tree.insert(8);
-tree.insert(65);
-tree.insert(70);
-tree.insert(60);
+tree.insert(20);
