@@ -47,9 +47,9 @@ function mergeTwoSortedArrays(arr1, arr2) {
     ? arr2.slice(j)
     : !arr2[j]
     ? arr1.slice(i)
-    : "nothing";
+    : 'nothing';
 
-  console.log("finish & gonna push the rest to results", willPush);
+  console.log('finish & gonna push the rest to results', willPush);
   if (!arr1[i]) results.push(...arr2.slice(j));
   if (!arr2[j]) results.push(...arr1.slice(i));
 

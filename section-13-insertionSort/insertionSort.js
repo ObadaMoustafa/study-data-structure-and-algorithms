@@ -1,6 +1,4 @@
 function insertionSort(arr) {
-  console.log("-------------------------");
-  console.log("original array", arr);
   function swap(arr, i, ii) {
     [arr[i], arr[ii]] = [arr[ii], arr[i]];
   }
@@ -10,7 +8,7 @@ function insertionSort(arr) {
     // console.log("new check ", i);
     let checkIndex = i;
     for (let j = i - 1; j >= 0 && arr[checkIndex] < arr[j]; j--) {
-      console.log("swap", checkIndex, j);
+      // console.log("swap", checkIndex, j);
       swap(arr, checkIndex, j);
       checkIndex = j;
       console.log(arr);

@@ -14,7 +14,6 @@ function getMaxDigit(arrOfNumbers) {
 
 function constructTable() {
   const table = Array.from({ length: 10 }, () => []);
-
   return table;
 }
 
@@ -28,7 +27,7 @@ function radixSort(arr) {
       table[tableIndex].push(arr[i]);
     }
 
-    arr = table.flat();
+    arr = flat(table);
   }
 
   return arr;
