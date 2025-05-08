@@ -1,5 +1,11 @@
 "use strict";
-class BinaryTree {
+class NODE {
+    constructor(val, priority) {
+        this.val = val;
+        this.priority = priority;
+    }
+}
+class PriorityQueue {
     constructor() {
         this.values = [];
     }
@@ -18,20 +24,22 @@ class BinaryTree {
             childIndexes.push(parentIndex * 2 + 1);
         else
             return [];
-        let hasSecondChild = !!this.values[parentIndex * 2 + 1];
+        let hasSecondChild = !!this.values[parentIndex * 2 + 2];
         if (hasSecondChild)
             childIndexes.push(parentIndex * 2 + 2);
         return childIndexes;
     }
-    insert(num) {
+    insert(val, priority) {
+        var _a, _b;
+        const node = new NODE(val, priority);
         let values = this.values;
-        const length = values.push(num);
+        const length = values.push(node);
         // first element
         if (length == 1)
             return;
         // more
         let index = length - 1, parentIndex = this.getParentIndex(index);
-        while (values[index] > values[parentIndex]) {
+        while (((_a = values[index]) === null || _a === void 0 ? void 0 : _a.priority) < ((_b = values[parentIndex]) === null || _b === void 0 ? void 0 : _b.priority)) {
             // swap with parent
             this.swap(index, parentIndex);
             index = parentIndex;
@@ -39,8 +47,9 @@ class BinaryTree {
         }
     }
     extractMax() {
+        var _a, _b, _c;
         if (this.values.length == 0)
-            return;
+            return this.values;
         let lastIndex = this.values.length - 1;
         this.swap(0, lastIndex);
         this.values.pop();
@@ -51,31 +60,32 @@ class BinaryTree {
             // check which bigger and swap.
             const isLast = childrenIndexes.length === 0;
             const hasTwoChildren = childrenIndexes.length === 2;
-            let parentValue = this.values[parentIdx], firstVal = this.values[firstIdx], secondVal = this.values[secondIdx];
+            let parentValue = (_a = this.values[parentIdx]) === null || _a === void 0 ? void 0 : _a.priority, firstVal = (_b = this.values[firstIdx]) === null || _b === void 0 ? void 0 : _b.priority, secondVal = (_c = this.values[secondIdx]) === null || _c === void 0 ? void 0 : _c.priority;
             if (isLast)
                 break;
             if (hasTwoChildren) {
-                const isParentGreeter = parentValue > firstVal && parentValue > secondVal;
-                // parent is greater than all
-                if (isParentGreeter)
+                const isParentMostPriority = parentValue < firstVal && parentValue < secondVal;
+                // parent has more priority than all
+                if (isParentMostPriority)
                     break;
-                // second is greater than first child
-                else if (secondVal > firstVal) {
+                // second has more priority than first child
+                else if (secondVal < firstVal) {
                     this.swap(secondIdx, parentIdx);
                     parentIdx = secondIdx;
                 }
-                // first is greater than second child
+                // first has more priority than second child
                 else {
                     this.swap(firstIdx, parentIdx);
                     parentIdx = firstIdx;
                 }
             }
-            // first is greater than parent
-            else if (firstVal > parentValue) {
+            // if has one child.
+            // first has more priority than parent
+            else if (firstVal < parentValue) {
                 this.swap(firstIdx, parentIdx);
                 parentIdx = firstIdx;
             }
-            // parent is greater than first
+            // parent has more priority than first
             else {
                 break;
             }
@@ -83,7 +93,24 @@ class BinaryTree {
         return this.values;
     }
 }
-const binaryHeap = new BinaryTree();
-binaryHeap.insert(41);
-binaryHeap.extractMax();
-console.log(binaryHeap.values);
+const heap = new PriorityQueue();
+heap.insert('should be top', 1);
+heap.insert('ninth', 9);
+heap.insert('second', 2);
+heap.insert('seventh', 7);
+heap.insert('eight', 8);
+heap.insert('fifth', 5);
+heap.insert('sixth', 6);
+heap.insert('fourth', 4);
+heap.insert('third', 3);
+console.log(heap.values);
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());

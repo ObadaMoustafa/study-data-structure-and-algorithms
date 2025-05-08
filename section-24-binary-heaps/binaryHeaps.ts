@@ -23,7 +23,7 @@ class BinaryTree {
     if (hasFirstChild) childIndexes.push(parentIndex * 2 + 1);
     else return [];
 
-    let hasSecondChild: boolean = !!this.values[parentIndex * 2 + 1];
+    let hasSecondChild: boolean = !!this.values[parentIndex * 2 + 2];
     if (hasSecondChild) childIndexes.push(parentIndex * 2 + 2);
 
     return childIndexes;
@@ -94,8 +94,8 @@ class BinaryTree {
   }
 }
 
-const heap = new BinaryTree();
-heap.insert(41);
+const binaryHeap = new BinaryTree();
+binaryHeap.insert(41);
 
-heap.extractMax();
-console.log(heap.values);
+binaryHeap.extractMax();
+console.log(binaryHeap.values);
